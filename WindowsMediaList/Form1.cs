@@ -70,17 +70,16 @@ namespace WindowsMediaList
             return directoryNode;
         }
 
-        private void create_Click_1(object sender, EventArgs e)
+        private void Create_Click(object sender, EventArgs e)
         {
             ListDirectory(DirTreeView, FilePath.Text);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Browse_Click(object sender, EventArgs e)
         {
             folderBrowserDialog1.ShowDialog();
             FilePath.Text = folderBrowserDialog1.SelectedPath;
         }
 
- 
     }
 }
