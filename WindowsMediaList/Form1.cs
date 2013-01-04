@@ -27,47 +27,63 @@ namespace WindowsMediaList
             treeView.Nodes.Add(CreateDirectoryNode(rootDirectoryInfo));
         }
 
-        private static TreeNode CreateDirectoryNode(DirectoryInfo directoryInfo)
+        private TreeNode CreateDirectoryNode(DirectoryInfo di)
         {
-            var directoryNode = new TreeNode(directoryInfo.Name);
-            XDocument xDoc = new XDocument();
+            var directoryNode = new TreeNode(di.Name);
 
-            foreach (var directory in directoryInfo.GetDirectories())
+            foreach (var directory in di.GetDirectories())
             {
                 directoryNode.Nodes.Add(CreateDirectoryNode(directory));
             }
 
-            List<XElement> seq = new List<XElement>();
-            bool isFiles = false;
-
-            Regex SpecialChars = new Regex(@"([^a-zA-Z0-9. ])+");
-            Regex isVideoFile = new Regex(@"^[\w\-. ]+(\.mp4|\.wmv|\.mov|\.avi|\.mp3)$");
-            string newFileName;
-
-            foreach (var file in (directoryInfo.GetFiles()).Select(f => f.Name))
+            foreach (var file in GetFiles(di))
             {
-                if (isVideoFile.IsMatch(file))
-                {
-                    isFiles = true;
-
-                    newFileName = file;
-                    if (SpecialChars.IsMatch(file))
-                    {
-                        newFileName = SpecialChars.Replace(file, "_");
-                        File.Move(directoryInfo.FullName + @"\" + file, directoryInfo.FullName + @"\" + newFileName);
-                    }
-                    seq.Add(new XElement("media", new XAttribute("src", newFileName)));
-
-                    directoryNode.Nodes.Add(new TreeNode(file));
-                }
+                directoryNode.Nodes.Add(new TreeNode(file));
             }
 
-            if (isFiles)
-            {
-                xDoc.Add(new XElement("smil", new XElement("head", new XElement("title", directoryInfo.Name)), new XElement("body", new XElement("seq", seq))));
-                xDoc.Save(directoryInfo.FullName + @"\index.wpl");
-            }
+            //List<XElement> seq = new List<XElement>();
+            //bool isFiles = false;
+
+            //Regex SpecialChars = new Regex(@"([^a-zA-Z0-9. ])+");
+            //Regex isVideoFile = new Regex(@"^[\w\-. ]+(\.mp4|\.wmv|\.mov|\.avi|\.mp3)$");
+            //string newFileName;
+
+            //foreach (var file in (di.GetFiles()).Select(f => f.Name))
+            //{
+            //    if (isVideoFile.IsMatch(file))
+            //    {
+            //        isFiles = true;
+
+            //        newFileName = file;
+            //        if (SpecialChars.IsMatch(file))
+            //        {
+            //            newFileName = SpecialChars.Replace(file, "_");
+            //            File.Move(di.FullName + @"\" + file, di.FullName + @"\" + newFileName);
+            //        }
+            //        seq.Add(new XElement("media", new XAttribute("src", newFileName)));
+
+            //        directoryNode.Nodes.Add(new TreeNode(file));
+            //    }
+            //}
+
+            //if (isFiles)
+            //{
+            //    xDoc.Add(new XElement("smil", new XElement("head", new XElement("title", di.Name)), new XElement("body", new XElement("seq", seq))));
+            //    xDoc.Save(di.FullName + @"\index.wpl");
+            //}
             return directoryNode;
+        }
+
+        private List<string> GetFiles(DirectoryInfo di)
+        {
+            List<string> files = new List<string>();
+
+            foreach (var file in di.GetFiles())
+            {
+                files.Add(file.Name);
+            }
+
+            return files;
         }
 
         private void Create_Click(object sender, EventArgs e)
