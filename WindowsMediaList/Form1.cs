@@ -36,9 +36,12 @@ namespace WindowsMediaList
                 directoryNode.Nodes.Add(CreateDirectoryNode(directory));
             }
 
-            foreach (var file in GetFiles(di))
+            string stripedFile;
+            var files = GetFiles(di);
+            foreach (var file in files)
             {
-                directoryNode.Nodes.Add(new TreeNode(file));
+                stripedFile = StripFile(file, di.FullName);
+                directoryNode.Nodes.Add(new TreeNode(stripedFile));
             }
 
             //List<XElement> seq = new List<XElement>();
@@ -74,13 +77,56 @@ namespace WindowsMediaList
             return directoryNode;
         }
 
+        private bool FilterFiles(string file)
+        {
+            Regex FilterFile = new Regex(@"^[\w\-. ]+(\.mp4|\.wmv|\.mov|\.avi|\.mp3)$");
+            return FilterFile.IsMatch(file);
+        }
+
+        private string StripFile(string oldFile, string path)
+        {
+            Regex SpecialChars = new Regex(@"[^a-zA-Z0-9._]+");
+            if (SpecialChars.IsMatch(oldFile))
+            {
+                var newFile = SpecialChars.Replace(oldFile, "_") + "_ml";
+                var newFilePath = MakeFilePath(newFile, path);
+                if (!File.Exists(newFilePath))
+                {
+                    var oldFilePath = MakeFilePath(oldFile, path);
+
+                    //File.Copy(oldFile, newFile);
+                }
+                oldFile = newFile;
+            }
+
+            return oldFile;
+        }
+
+        private string MakeFilePath(string item, string path)
+        {
+            var fullPath = new StringBuilder();
+            fullPath.Append(path).Append("\\").Append(item);
+
+            var r = new Regex(@"\\");
+            item = r.Replace(fullPath.ToString(), @"\");
+
+            return item;
+        }
+
+        private void FileCopy(string oldFile, string newFile)
+        {
+        }
+
         private List<string> GetFiles(DirectoryInfo di)
         {
             List<string> files = new List<string>();
 
             foreach (var file in di.GetFiles())
             {
-                files.Add(file.Name);
+                if (FilterFiles(file.Name))
+                {
+                    files.Add(file.Name);
+                }
             }
 
             return files;
