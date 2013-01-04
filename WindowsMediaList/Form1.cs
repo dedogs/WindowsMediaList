@@ -36,44 +36,16 @@ namespace WindowsMediaList
                 directoryNode.Nodes.Add(CreateDirectoryNode(directory));
             }
 
-            string stripedFile;
             var files = GetFiles(di);
             foreach (var file in files)
             {
-                stripedFile = StripFile(file, di.FullName);
-                directoryNode.Nodes.Add(new TreeNode(stripedFile));
+                directoryNode.Nodes.Add(new TreeNode(file));
             }
 
-            //List<XElement> seq = new List<XElement>();
-            //bool isFiles = false;
+            var mediaListFile = MakeFilePath("index.wpl", di.FullName);
+            XDocument xDoc = new XDocument(new XElement("smil", new XElement("head", new XElement("title", di.Name)), new XElement("body", new XElement("seq", files.Select(f => new XElement("media", new XAttribute("src", f)))))));
+            xDoc.Save(mediaListFile);
 
-            //Regex SpecialChars = new Regex(@"([^a-zA-Z0-9. ])+");
-            //Regex isVideoFile = new Regex(@"^[\w\-. ]+(\.mp4|\.wmv|\.mov|\.avi|\.mp3)$");
-            //string newFileName;
-
-            //foreach (var file in (di.GetFiles()).Select(f => f.Name))
-            //{
-            //    if (isVideoFile.IsMatch(file))
-            //    {
-            //        isFiles = true;
-
-            //        newFileName = file;
-            //        if (SpecialChars.IsMatch(file))
-            //        {
-            //            newFileName = SpecialChars.Replace(file, "_");
-            //            File.Move(di.FullName + @"\" + file, di.FullName + @"\" + newFileName);
-            //        }
-            //        seq.Add(new XElement("media", new XAttribute("src", newFileName)));
-
-            //        directoryNode.Nodes.Add(new TreeNode(file));
-            //    }
-            //}
-
-            //if (isFiles)
-            //{
-            //    xDoc.Add(new XElement("smil", new XElement("head", new XElement("title", di.Name)), new XElement("body", new XElement("seq", seq))));
-            //    xDoc.Save(di.FullName + @"\index.wpl");
-            //}
             return directoryNode;
         }
 
@@ -85,21 +57,31 @@ namespace WindowsMediaList
 
         private string StripFile(string oldFile, string path)
         {
-            Regex SpecialChars = new Regex(@"[^a-zA-Z0-9._]+");
+            Regex SpecialChars = new Regex(@"[^a-zA-Z0-9._ ]+");
             if (SpecialChars.IsMatch(oldFile))
             {
-                var newFile = SpecialChars.Replace(oldFile, "_") + "_ml";
+                var newFile = AddFilePrefix(SpecialChars.Replace(oldFile, "_"));
                 var newFilePath = MakeFilePath(newFile, path);
+
                 if (!File.Exists(newFilePath))
                 {
                     var oldFilePath = MakeFilePath(oldFile, path);
 
-                    //File.Copy(oldFile, newFile);
+                    File.Copy(oldFilePath, newFilePath);
                 }
                 oldFile = newFile;
             }
 
             return oldFile;
+        }
+
+        private string AddFilePrefix(string newFile)
+        {
+            var period = newFile.LastIndexOf('.');
+            var file = newFile.Substring(0, period);
+            var ext = newFile.Substring(period);
+
+            return file + "_ml" + ext;
         }
 
         private string MakeFilePath(string item, string path)
@@ -120,12 +102,14 @@ namespace WindowsMediaList
         private List<string> GetFiles(DirectoryInfo di)
         {
             List<string> files = new List<string>();
-
+            string stripedFile;
+            string path = di.FullName;
             foreach (var file in di.GetFiles())
             {
                 if (FilterFiles(file.Name))
                 {
-                    files.Add(file.Name);
+                    stripedFile = StripFile(file.Name, path);
+                    files.Add(stripedFile);
                 }
             }
 
