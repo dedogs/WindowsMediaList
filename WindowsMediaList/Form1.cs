@@ -10,6 +10,7 @@ using System.IO;
 using System.Xml.Linq;
 using System.Text.RegularExpressions;
 using System.Collections;
+using System.Threading.Tasks;
 
 namespace WindowsMediaList
 {
@@ -20,20 +21,20 @@ namespace WindowsMediaList
             InitializeComponent();
         }
 
-        private void ListDirectory(TreeView treeView, string path)
+        private async void ListDirectory(TreeView treeView, string path)
         {
             treeView.Nodes.Clear();
             var rootDirectoryInfo = new DirectoryInfo(path);
-            treeView.Nodes.Add(CreateDirectoryNode(rootDirectoryInfo));
+            treeView.Nodes.Add(await CreateDirectoryNode(rootDirectoryInfo));
         }
 
-        private TreeNode CreateDirectoryNode(DirectoryInfo di)
+        private async Task<TreeNode> CreateDirectoryNode(DirectoryInfo di)
         {
             var directoryNode = new TreeNode(di.Name);
 
             foreach (var directory in di.GetDirectories())
             {
-                directoryNode.Nodes.Add(CreateDirectoryNode(directory));
+                directoryNode.Nodes.Add(await CreateDirectoryNode(directory));
             }
 
             var files = GetFiles(di);
@@ -49,41 +50,6 @@ namespace WindowsMediaList
             return directoryNode;
         }
 
-        private bool FilterFiles(string file)
-        {
-            Regex FilterFile = new Regex(@"^[\w\-. ]+(\.mp4|\.wmv|\.mov|\.avi|\.mp3)$");
-            return FilterFile.IsMatch(file);
-        }
-
-        private string StripFile(string oldFile, string path)
-        {
-            Regex SpecialChars = new Regex(@"[^a-zA-Z0-9._ ]+");
-            if (SpecialChars.IsMatch(oldFile))
-            {
-                var newFile = AddFilePrefix(SpecialChars.Replace(oldFile, "_"));
-                var newFilePath = MakeFilePath(newFile, path);
-
-                if (!File.Exists(newFilePath))
-                {
-                    var oldFilePath = MakeFilePath(oldFile, path);
-
-                    File.Copy(oldFilePath, newFilePath);
-                }
-                oldFile = newFile;
-            }
-
-            return oldFile;
-        }
-
-        private string AddFilePrefix(string newFile)
-        {
-            var period = newFile.LastIndexOf('.');
-            var file = newFile.Substring(0, period);
-            var ext = newFile.Substring(period);
-
-            return file + "_ml" + ext;
-        }
-
         private string MakeFilePath(string item, string path)
         {
             var fullPath = new StringBuilder();
@@ -95,20 +61,49 @@ namespace WindowsMediaList
             return item;
         }
 
-        private void FileCopy(string oldFile, string newFile)
+        private bool FilterFiles(string file)
         {
+            Regex FilterFile = new Regex(@"^[\w\-. ]+(\.mp4|\.wmv|\.mov|\.avi|\.mp3)$");
+            return FilterFile.IsMatch(file);
+        }
+
+        private string StripFile(string oldFile)
+        {
+            string newFile = null;
+
+            Regex SpecialChars = new Regex(@"[^a-zA-Z0-9._\- ]+", RegexOptions.Multiline);
+
+            if (SpecialChars.IsMatch(oldFile))
+            {
+                newFile = SpecialChars.Replace(oldFile, "");
+            }
+
+            newFile = newFile ?? oldFile;
+
+            return (new Regex(@"[\-]+", RegexOptions.Multiline)).Replace(newFile, "_");
         }
 
         private List<string> GetFiles(DirectoryInfo di)
         {
             List<string> files = new List<string>();
             string stripedFile;
-            string path = di.FullName;
+            var path = di.FullName;
+
             foreach (var file in di.GetFiles())
             {
-                if (FilterFiles(file.Name))
+                stripedFile = StripFile(file.Name);
+
+                if (FilterFiles(stripedFile))
                 {
-                    stripedFile = StripFile(file.Name, path);
+                    var newFilePath = MakeFilePath(stripedFile, path);
+
+                    if (!File.Exists(newFilePath))
+                    {
+                        var oldFilePath = MakeFilePath(file.Name, path);
+
+                        File.Move(oldFilePath, newFilePath);
+                    }
+
                     files.Add(stripedFile);
                 }
             }
@@ -119,12 +114,18 @@ namespace WindowsMediaList
         private void Create_Click(object sender, EventArgs e)
         {
             ListDirectory(DirTreeView, FilePath.Text);
+            //WMLCreate.ActiveForm.Text = "Done";
         }
 
         private void Browse_Click(object sender, EventArgs e)
         {
+            var btn = (Button)sender;
             folderBrowserDialog1.ShowDialog();
             FilePath.Text = folderBrowserDialog1.SelectedPath;
+        }
+
+        private void WMLCreate_Load(object sender, EventArgs e)
+        {
         }
 
     }

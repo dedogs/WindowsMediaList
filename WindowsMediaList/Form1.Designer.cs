@@ -135,6 +135,7 @@
             this.MaximizeBox = false;
             this.Name = "WMLCreate";
             this.Text = "Create Windows Media List";
+            this.Load += new System.EventHandler(this.WMLCreate_Load);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);

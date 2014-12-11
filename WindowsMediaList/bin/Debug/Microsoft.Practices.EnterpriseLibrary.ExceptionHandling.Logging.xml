@@ -244,12 +244,11 @@
             The minimum value for messages to be processed.  Messages with a priority below the minimum are dropped immediately on the client.
             </param>
         </member>
-        <member name="M:Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.Configuration.LoggingExceptionHandlerData.GetRegistrations(System.String)">
+        <member name="M:Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.Configuration.LoggingExceptionHandlerData.BuildExceptionHandler">
             <summary>
-            TODOC : review
+            Builds the exception handler represented by this configuration object.
             </summary>
-            <param name="namePrefix"></param>
-            <returns></returns>
+            <returns>An <see cref="T:Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.IExceptionHandler"/>.</returns>
         </member>
         <member name="P:Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.Configuration.LoggingExceptionHandlerData.LogCategory">
             <summary>
@@ -294,102 +293,6 @@
             <summary>
             Gets or sets the default logger to be used.
             </summary>
-        </member>
-        <member name="T:Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.Configuration.Manageability.LoggingExceptionHandlerDataManageabilityProvider">
-            <summary>
-            Provides an implementation for <see cref="T:Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.Configuration.LoggingExceptionHandlerData"/> that
-            processes policy overrides, performing appropriate logging of 
-            policy processing errors.
-            </summary>
-        </member>
-        <member name="F:Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.Configuration.Manageability.LoggingExceptionHandlerDataManageabilityProvider.EventIdPropertyName">
-            <summary>
-            The name of the event id property.
-            </summary>
-        </member>
-        <member name="F:Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.Configuration.Manageability.LoggingExceptionHandlerDataManageabilityProvider.FormatterTypePropertyName">
-            <summary>
-            The name of the formatter type property.
-            </summary>
-        </member>
-        <member name="F:Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.Configuration.Manageability.LoggingExceptionHandlerDataManageabilityProvider.LogCategoryPropertyName">
-            <summary>
-            The name of the log category property.
-            </summary>
-        </member>
-        <member name="F:Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.Configuration.Manageability.LoggingExceptionHandlerDataManageabilityProvider.PriorityPropertyName">
-            <summary>
-            The name of the priority property.
-            </summary>
-        </member>
-        <member name="F:Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.Configuration.Manageability.LoggingExceptionHandlerDataManageabilityProvider.SeverityPropertyName">
-            <summary>
-            The name of the severity property.
-            </summary>
-        </member>
-        <member name="F:Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.Configuration.Manageability.LoggingExceptionHandlerDataManageabilityProvider.TitlePropertyName">
-            <summary>
-            The name of the title property.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.Configuration.Manageability.LoggingExceptionHandlerDataManageabilityProvider.#ctor">
-            <summary>
-            Initialize a new instance of the <see cref="T:Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.Configuration.Manageability.LoggingExceptionHandlerDataManageabilityProvider"/> class.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.Configuration.Manageability.LoggingExceptionHandlerDataManageabilityProvider.AddAdministrativeTemplateDirectives(Microsoft.Practices.EnterpriseLibrary.Common.Configuration.Manageability.Adm.AdmContentBuilder,Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.Configuration.LoggingExceptionHandlerData,Microsoft.Practices.EnterpriseLibrary.Common.Configuration.IConfigurationSource,System.String)">
-            <summary>
-            Adds the ADM instructions that describe the policies that can be used to override the properties of
-            a specific instance of the configuration element type managed by the receiver.
-            </summary>
-            <param name="contentBuilder">The <see cref="T:Microsoft.Practices.EnterpriseLibrary.Common.Configuration.Manageability.Adm.AdmContentBuilder"/> to which the Adm instructions are to be appended.</param>
-            <param name="configurationObject">The configuration object instance.</param>
-            <param name="configurationSource">The configuration source from where to get additional configuration
-            information, if necessary.</param>
-            <param name="elementPolicyKeyName">The key for the element's policies.</param>
-            <remarks>
-            The default implementation for this method creates a policy, using 
-            <see cref="P:Microsoft.Practices.EnterpriseLibrary.Common.Configuration.Manageability.ConfigurationElementManageabilityProviderBase`1.ElementPolicyNameTemplate"/> to create the policy name and invoking
-            <see cref="M:Microsoft.Practices.EnterpriseLibrary.Common.Configuration.Manageability.ConfigurationElementManageabilityProviderBase`1.AddElementAdministrativeTemplateParts(Microsoft.Practices.EnterpriseLibrary.Common.Configuration.Manageability.Adm.AdmContentBuilder,`0,Microsoft.Practices.EnterpriseLibrary.Common.Configuration.IConfigurationSource,System.String)"/>
-            to add the policy parts.
-            Subclasses managing objects that must not create a policy must override this method to just add the parts.
-            </remarks>
-        </member>
-        <member name="M:Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.Configuration.Manageability.LoggingExceptionHandlerDataManageabilityProvider.AddElementAdministrativeTemplateParts(Microsoft.Practices.EnterpriseLibrary.Common.Configuration.Manageability.Adm.AdmContentBuilder,Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.Configuration.LoggingExceptionHandlerData,Microsoft.Practices.EnterpriseLibrary.Common.Configuration.IConfigurationSource,System.String)">
-            <summary>
-            Adds the ADM parts that represent the properties of
-            a specific instance of the configuration element type managed by the receiver.
-            </summary>
-            <param name="contentBuilder">The <see cref="T:Microsoft.Practices.EnterpriseLibrary.Common.Configuration.Manageability.Adm.AdmContentBuilder"/> to which the Adm instructions are to be appended.</param>
-            <param name="configurationObject">The configuration object instance.</param>
-            <param name="configurationSource">The configuration source from where to get additional configuration
-            information, if necessary.</param>
-            <param name="elementPolicyKeyName">The key for the element's policies.</param>
-            <remarks>
-            Subclasses managing objects that must not create a policy will likely need to include the elements' keys when creating the parts.
-            </remarks>
-        </member>
-        <member name="M:Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.Configuration.Manageability.LoggingExceptionHandlerDataManageabilityProvider.OverrideWithGroupPolicies(Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.Configuration.LoggingExceptionHandlerData,Microsoft.Practices.EnterpriseLibrary.Common.Configuration.Manageability.IRegistryKey)">
-            <summary>
-            Overrides the <paramref name="configurationObject"/>'s properties with the Group Policy values from the 
-            registry.
-            </summary>
-            <param name="configurationObject">The configuration object for instances that must be managed.</param>
-            <param name="policyKey">The <see cref="T:Microsoft.Practices.EnterpriseLibrary.Common.Configuration.Manageability.IRegistryKey"/> which holds the Group Policy overrides for the 
-            configuration element.</param>
-            <remarks>Subclasses implementing this method must retrieve all the override values from the registry
-            before making modifications to the <paramref name="configurationObject"/> so any error retrieving
-            the override values will cancel policy processing.</remarks>
-        </member>
-        <member name="P:Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.Configuration.Manageability.LoggingExceptionHandlerDataManageabilityProvider.ElementPolicyNameTemplate">
-            <summary>
-            Gets the template for the name of the policy associated to the object.
-            </summary>
-            <remarks>
-            Elements that override 
-            <see cref="M:Microsoft.Practices.EnterpriseLibrary.Common.Configuration.Manageability.ConfigurationElementManageabilityProviderBase`1.AddAdministrativeTemplateDirectives(Microsoft.Practices.EnterpriseLibrary.Common.Configuration.Manageability.Adm.AdmContentBuilder,`0,Microsoft.Practices.EnterpriseLibrary.Common.Configuration.IConfigurationSource,System.String)"/>
-            to avoid creating a policy must still override this property.
-            </remarks>
         </member>
         <member name="T:Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.LoggingExceptionHandler">
             <summary>
@@ -468,6 +371,16 @@
               resource lookups using this strongly typed resource class.
             </summary>
         </member>
+        <member name="P:Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.Properties.Resources.ExceptionFormatterTypeNotFormatter">
+            <summary>
+              Looks up a localized string similar to The type specified for the formatter is not a formatter type..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.Properties.Resources.ExceptionFormatterTypeNotSetOrInvalid">
+            <summary>
+              Looks up a localized string similar to The formatter type is not set or does not represent a type..
+            </summary>
+        </member>
         <member name="P:Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.Properties.Resources.HandlerPartNameTemplate">
             <summary>
               Looks up a localized string similar to Handler: &apos;{0}&apos;.
@@ -506,6 +419,11 @@
         <member name="P:Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.Properties.Resources.MissingConstructor">
             <summary>
               Looks up a localized string similar to The configured exception formatter &apos;{0}&apos; must expose a public constructor that takes a TextWriter object, an Exception object and a GUID instance as parameters..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.Properties.Resources.MustSetLoggerWriterException">
+            <summary>
+              Looks up a localized string similar to The Logger.Writer property must be set before building a LoggingExceptionHandler..
             </summary>
         </member>
     </members>

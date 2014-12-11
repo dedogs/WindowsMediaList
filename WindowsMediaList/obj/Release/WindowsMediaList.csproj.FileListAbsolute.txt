@@ -51,3 +51,38 @@ C:\Users\deDogs\Kirk\Visual Studio\Projects\WindowsMediaList\WindowsMediaList\ob
 C:\Users\deDogs\Kirk\Visual Studio\Projects\WindowsMediaList\WindowsMediaList\obj\Release\WindowsMediaList.WMLCreate.resources
 C:\Users\deDogs\Kirk\Visual Studio\Projects\WindowsMediaList\WindowsMediaList\obj\Release\WindowsMediaList.Properties.Resources.resources
 C:\Users\deDogs\Kirk\Visual Studio\Projects\WindowsMediaList\WindowsMediaList\obj\Release\WindowsMediaList.csproj.GenerateResource.Cache
+C:\Kirk\Visual Studio 2012\Projects\_Components\WindowsMediaList\WindowsMediaList\bin\Release\WindowsMediaList.exe.config
+C:\Kirk\Visual Studio 2012\Projects\_Components\WindowsMediaList\WindowsMediaList\obj\Release\WindowsMediaList.exe
+C:\Kirk\Visual Studio 2012\Projects\_Components\WindowsMediaList\WindowsMediaList\obj\Release\WindowsMediaList.pdb
+C:\Kirk\Visual Studio 2012\Projects\_Components\WindowsMediaList\WindowsMediaList\bin\Release\WindowsMediaList.exe
+C:\Kirk\Visual Studio 2012\Projects\_Components\WindowsMediaList\WindowsMediaList\bin\Release\WindowsMediaList.pdb
+C:\Kirk\Visual Studio 2012\Projects\_Components\WindowsMediaList\WindowsMediaList\bin\Release\Microsoft.Practices.EnterpriseLibrary.Common.dll
+C:\Kirk\Visual Studio 2012\Projects\_Components\WindowsMediaList\WindowsMediaList\bin\Release\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll
+C:\Kirk\Visual Studio 2012\Projects\_Components\WindowsMediaList\WindowsMediaList\bin\Release\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.dll
+C:\Kirk\Visual Studio 2012\Projects\_Components\WindowsMediaList\WindowsMediaList\bin\Release\Microsoft.Practices.EnterpriseLibrary.Logging.dll
+C:\Kirk\Visual Studio 2012\Projects\_Components\WindowsMediaList\WindowsMediaList\bin\Release\Microsoft.Practices.EnterpriseLibrary.Common.xml
+C:\Kirk\Visual Studio 2012\Projects\_Components\WindowsMediaList\WindowsMediaList\bin\Release\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.xml
+C:\Kirk\Visual Studio 2012\Projects\_Components\WindowsMediaList\WindowsMediaList\bin\Release\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.xml
+C:\Kirk\Visual Studio 2012\Projects\_Components\WindowsMediaList\WindowsMediaList\bin\Release\Microsoft.Practices.EnterpriseLibrary.Logging.xml
+C:\Kirk\Visual Studio 2012\Projects\_Components\WindowsMediaList\WindowsMediaList\obj\Release\WindowsMediaList.csprojResolveAssemblyReference.cache
+C:\Kirk\Visual Studio 2012\Projects\_Components\WindowsMediaList\WindowsMediaList\obj\Release\WindowsMediaList.WMLCreate.resources
+C:\Kirk\Visual Studio 2012\Projects\_Components\WindowsMediaList\WindowsMediaList\obj\Release\WindowsMediaList.Properties.Resources.resources
+C:\Kirk\Visual Studio 2012\Projects\_Components\WindowsMediaList\WindowsMediaList\obj\Release\WindowsMediaList.csproj.GenerateResource.Cache
+Z:\Kirk\Visual Studio 2012\Projects\WindowsMediaList\WindowsMediaList\bin\Release\WindowsMediaList.exe.config
+Z:\Kirk\Visual Studio 2012\Projects\WindowsMediaList\WindowsMediaList\obj\Release\WindowsMediaList.exe
+Z:\Kirk\Visual Studio 2012\Projects\WindowsMediaList\WindowsMediaList\obj\Release\WindowsMediaList.pdb
+Z:\Kirk\Visual Studio 2012\Projects\WindowsMediaList\WindowsMediaList\bin\Release\WindowsMediaList.exe
+Z:\Kirk\Visual Studio 2012\Projects\WindowsMediaList\WindowsMediaList\bin\Release\WindowsMediaList.pdb
+Z:\Kirk\Visual Studio 2012\Projects\WindowsMediaList\WindowsMediaList\bin\Release\Microsoft.Practices.EnterpriseLibrary.Common.dll
+Z:\Kirk\Visual Studio 2012\Projects\WindowsMediaList\WindowsMediaList\bin\Release\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll
+Z:\Kirk\Visual Studio 2012\Projects\WindowsMediaList\WindowsMediaList\bin\Release\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.dll
+Z:\Kirk\Visual Studio 2012\Projects\WindowsMediaList\WindowsMediaList\bin\Release\Microsoft.Practices.EnterpriseLibrary.Logging.dll
+Z:\Kirk\Visual Studio 2012\Projects\WindowsMediaList\WindowsMediaList\bin\Release\Newtonsoft.Json.dll
+Z:\Kirk\Visual Studio 2012\Projects\WindowsMediaList\WindowsMediaList\bin\Release\Microsoft.Practices.EnterpriseLibrary.Common.xml
+Z:\Kirk\Visual Studio 2012\Projects\WindowsMediaList\WindowsMediaList\bin\Release\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.xml
+Z:\Kirk\Visual Studio 2012\Projects\WindowsMediaList\WindowsMediaList\bin\Release\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.xml
+Z:\Kirk\Visual Studio 2012\Projects\WindowsMediaList\WindowsMediaList\bin\Release\Microsoft.Practices.EnterpriseLibrary.Logging.xml
+Z:\Kirk\Visual Studio 2012\Projects\WindowsMediaList\WindowsMediaList\obj\Release\WindowsMediaList.csprojResolveAssemblyReference.cache
+Z:\Kirk\Visual Studio 2012\Projects\WindowsMediaList\WindowsMediaList\obj\Release\WindowsMediaList.WMLCreate.resources
+Z:\Kirk\Visual Studio 2012\Projects\WindowsMediaList\WindowsMediaList\obj\Release\WindowsMediaList.Properties.Resources.resources
+Z:\Kirk\Visual Studio 2012\Projects\WindowsMediaList\WindowsMediaList\obj\Release\WindowsMediaList.csproj.GenerateResource.Cache
